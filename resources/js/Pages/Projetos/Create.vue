@@ -35,6 +35,16 @@ const editar = (m) => {
 
 }
 
+const submit = () => {
+
+    form.post(route('projetos.store'), {
+        onSuccess: () => {
+            form.reset()
+
+        }
+    });
+}
+
 </script>
 
 <template>
@@ -50,7 +60,7 @@ const editar = (m) => {
             <div class="w-full mx-auto sm:px-6 lg:px-8">
                 <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg">
 
-                    <form class="w-full p-2">
+                    <form class="w-full p-2" @submit.prevent="submit">
                         <div class="flex flex-wrap -mx-3 mb-6">
                             <div class="w-full px-3">
                                 <label class="block uppercase tracking-wide text-xs font-bold mb-2" for="grid-password">
@@ -60,7 +70,7 @@ const editar = (m) => {
                                     class="appearance-none block w-full border rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white focus:border-gray-500"
                                     id="grid-password" type="text" placeholder="Título do Projeto"
                                     v-model="form.titulo">
-                                <p class="text-gray-600 text-xs italic">Make it as long and as crazy as you'd like
+                                <p class="text-gray-600 text-xs italic">{{ form.errors.titulo }}
                                 </p>
                             </div>
                         </div>
@@ -73,7 +83,7 @@ const editar = (m) => {
                                 <input
                                     class="appearance-none block w-full border rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white"
                                     id="grid-first-name" type="date" placeholder="" v-model="form.data_inicio">
-
+                                <p>{{ form.errors.data_inicio }}</p>
                             </div>
                             <div class="w-full md:w-1/2 px-3">
                                 <label class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2"
@@ -83,6 +93,7 @@ const editar = (m) => {
                                 <input
                                     class="appearance-none block w-full border rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500"
                                     id="grid-last-name" type="date" placeholder="" v-model="form.data_termino">
+                                <p>{{ form.errors.data_termino }}</p>
                             </div>
                         </div>
 

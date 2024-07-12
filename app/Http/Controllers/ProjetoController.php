@@ -19,4 +19,27 @@ class ProjetoController extends Controller
     {
         return Inertia::render('Projetos/Create');
     }
+
+    public function store(Request $request)
+    {
+        //dd($request->all());
+        $validated = $request->validate([
+            'titulo' => 'required|max:255',
+            'data_inicio' => 'required|date',
+            'data_termino' => 'required|date|after:data_termino',
+
+        ]);
+    }
+
+    public function storeMembro(Request $request)
+    {
+        //dd($request->all());
+        $validated = $request->validate([
+            'nome' => 'required|max:255',
+            'carga_horaria_semanal' => 'required|numeric'
+
+        ]);
+
+    }
+
 }

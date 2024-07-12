@@ -28,17 +28,14 @@ const form = useForm({
 
 const store = () => {
 
-    emit('adicionarMembro', form);
-    //membros.push({ nome: form.nome, carga_horaria_semanal: form.carga_horaria_semanal });
-    form.reset();
-    emit('close');
-    /*form.post(route('projetos.store'), {
+    form.post(route('membros-projeto'), {
         onSuccess: () => {
-            membros.push({ nome: form.nome, carga_horaria_semanal: form.carga_horaria_semanal });
+            //membros.push({ nome: form.nome, carga_horaria_semanal: form.carga_horaria_semanal });
+            emit('adicionarMembro', form)
             form.reset()
             emit('close')
         }
-    });*/
+    });
 };
 
 const emit = defineEmits(['close', 'updated', 'adicionarMembro']);
@@ -85,7 +82,7 @@ watch(
                             Docente</label>
 
                         <input type="text" name="" id="" v-model="form.nome" class="w-full">
-
+                        <p>{{ form.errors.nome }}</p>
                     </div>
 
                 </div>
@@ -94,7 +91,7 @@ watch(
                         <label for="category_id" class="block mb-2 text-sm font-medium text-gray-900 ">Carga horária
                             Semanal</label>
                         <input type="text" name="" id="" v-model="form.carga_horaria_semanal" class="w-full">
-
+                        <p>{{ form.errors.carga_horaria_semanal }}</p>
                     </div>
                 </div>
             </div>
